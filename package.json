@@ -1,0 +1,11 @@
+{
+  "name": "starfield-monitor-workspace",
+  "private": true,
+  "workspaces": ["web/companion"],
+  "scripts": {
+    "dev": "npm --prefix web/companion run dev",
+    "build": "npm --prefix web/companion run build",
+    "preview": "npm --prefix web/companion run preview",
+    "install:web": "npm install -w web/companion"
+  }
+}

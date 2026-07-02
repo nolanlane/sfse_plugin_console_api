@@ -95,6 +95,8 @@ namespace plugin
 						}
 					}
 				}
+
+				plugin::telemetry::mark_snapshot_updated();
 			}
 		};
 
@@ -397,8 +399,56 @@ namespace plugin
 					co_return false;
 				};
 
+				static auto status_endpoint = [](
+					boost::asio::ip::tcp::socket& socket,
+					boost::beast::http::request<boost::beast::http::string_body>& request,
+					boost::beast::http::response<boost::beast::http::string_body>& response
+				) -> co_async<bool> {
+					response.set(boost::beast::http::field::content_type, "application/json; charset=utf-8");
+					response.set(boost::beast::http::field::cache_control, "no-cache");
+					response.body() = plugin::telemetry::status_json();
+					co_return true;
+				};
+
+				static auto player_endpoint = [](
+					boost::asio::ip::tcp::socket& socket,
+					boost::beast::http::request<boost::beast::http::string_body>& request,
+					boost::beast::http::response<boost::beast::http::string_body>& response
+				) -> co_async<bool> {
+					response.set(boost::beast::http::field::content_type, "application/json; charset=utf-8");
+					response.set(boost::beast::http::field::cache_control, "no-cache");
+					response.body() = plugin::telemetry::player_json();
+					co_return true;
+				};
+
+				static auto location_endpoint = [](
+					boost::asio::ip::tcp::socket& socket,
+					boost::beast::http::request<boost::beast::http::string_body>& request,
+					boost::beast::http::response<boost::beast::http::string_body>& response
+				) -> co_async<bool> {
+					response.set(boost::beast::http::field::content_type, "application/json; charset=utf-8");
+					response.set(boost::beast::http::field::cache_control, "no-cache");
+					response.body() = plugin::telemetry::location_json();
+					co_return true;
+				};
+
+				static auto snapshot_endpoint = [](
+					boost::asio::ip::tcp::socket& socket,
+					boost::beast::http::request<boost::beast::http::string_body>& request,
+					boost::beast::http::response<boost::beast::http::string_body>& response
+				) -> co_async<bool> {
+					response.set(boost::beast::http::field::content_type, "application/json; charset=utf-8");
+					response.set(boost::beast::http::field::cache_control, "no-cache");
+					response.body() = plugin::telemetry::snapshot_json();
+					co_return true;
+				};
+
 				plugin::app::server()->map_post("/console", console_endpoint);
 				plugin::app::server()->map_get("/stream", stream_endpoint);
+				plugin::app::server()->map_get("/api/status", status_endpoint);
+				plugin::app::server()->map_get("/api/player", player_endpoint);
+				plugin::app::server()->map_get("/api/location", location_endpoint);
+				plugin::app::server()->map_get("/api/snapshot", snapshot_endpoint);
 
 				return true;
 			}

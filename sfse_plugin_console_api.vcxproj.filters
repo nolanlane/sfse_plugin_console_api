@@ -24,6 +24,9 @@
     <ClInclude Include="inc\plugin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="inc\telemetry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="inc\app.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -57,6 +60,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\plugin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\telemetry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\app.cpp">

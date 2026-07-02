@@ -87,11 +87,23 @@ namespace plugin
 			boost::beast::http::response<boost::beast::http::string_body>& response,
 			const std::unordered_map<std::string, server::handler_t>& handlers
 		) {
+			auto target = std::string(request.target());
+			auto path = target.substr(0, target.find_first_of("?#"));
+
+			auto exact_it = handlers.find(path);
+			if (exact_it != handlers.end()) {
+				if (co_await exact_it->second(socket, request, response)) {
+					response.prepare_payload();
+					co_await boost::beast::http::async_write(socket, response, boost::asio::use_awaitable);
+				}
+
+				co_return true;
+			}
+
 			auto regex = std::regex("^(\\/[^/?]+)");
 			auto match = std::smatch();
-			auto target = std::string(request.target());
 
-			if (std::regex_search(target, match, regex) && match.size() > 1) {
+			if (std::regex_search(path, match, regex) && match.size() > 1) {
 				auto it = handlers.find(match[1].str());
 
 				if (it != handlers.end()) {

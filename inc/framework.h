@@ -71,4 +71,5 @@ using co_async = boost::asio::awaitable<T>;
 #include "console.h"
 #include "hooks.h"
 #include "server.h"
+#include "telemetry.h"
 #include "app.h"

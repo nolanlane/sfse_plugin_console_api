@@ -1,0 +1,238 @@
+[
+  {
+    "id": "help-keyword",
+    "title": "Search console help",
+    "commandTemplate": "help {keyword}",
+    "category": "Discovery",
+    "description": "Search console help output for a keyword.",
+    "tags": ["help", "search"],
+    "safetyClass": "safe",
+    "defaultMode": "command",
+    "parameters": [{ "name": "keyword", "label": "Keyword", "type": "text", "required": true, "defaultValue": "player" }]
+  },
+  {
+    "id": "player-health",
+    "title": "Get player health",
+    "commandTemplate": "player.getav health",
+    "category": "Player Stats",
+    "description": "Reads the player's current health actor value.",
+    "tags": ["player", "stat"],
+    "safetyClass": "safe",
+    "defaultMode": "command"
+  },
+  {
+    "id": "player-carryweight",
+    "title": "Get carry weight",
+    "commandTemplate": "player.getav carryweight",
+    "category": "Player Stats",
+    "description": "Reads the player's carry weight actor value.",
+    "tags": ["player", "stat"],
+    "safetyClass": "safe",
+    "defaultMode": "command"
+  },
+  {
+    "id": "player-oxygen",
+    "title": "Get oxygen reserve",
+    "commandTemplate": "player.getav oxygen",
+    "category": "Player Stats",
+    "description": "Attempts to read the current O₂ actor value for exploration monitoring.",
+    "tags": ["player", "stat", "oxygen", "o2"],
+    "safetyClass": "safe",
+    "defaultMode": "command"
+  },
+  {
+    "id": "player-level",
+    "title": "Get level",
+    "commandTemplate": "player.getlevel",
+    "category": "Player Stats",
+    "description": "Reads the player's current level.",
+    "tags": ["player", "level", "progression"],
+    "safetyClass": "safe",
+    "defaultMode": "command"
+  },
+  {
+    "id": "god-mode",
+    "title": "Toggle god mode",
+    "commandTemplate": "tgm",
+    "category": "Cheats / Toggles",
+    "description": "Toggles god mode. App can only track last sent state because console output is not authoritative.",
+    "tags": ["cheat", "toggle", "god"],
+    "safetyClass": "dangerous",
+    "defaultMode": "stream"
+  },
+  {
+    "id": "noclip",
+    "title": "Toggle no-clip",
+    "commandTemplate": "tcl",
+    "category": "Cheats / Toggles",
+    "description": "Toggles collision/no-clip. Save first before using in interiors or quest spaces.",
+    "tags": ["cheat", "toggle", "noclip", "travel"],
+    "safetyClass": "dangerous",
+    "defaultMode": "stream"
+  },
+  {
+    "id": "detect-ai",
+    "title": "Toggle AI detection",
+    "commandTemplate": "tdetect",
+    "category": "Cheats / Toggles",
+    "description": "Toggles NPC detection for stealth testing.",
+    "tags": ["cheat", "stealth", "ai"],
+    "safetyClass": "confirmation",
+    "defaultMode": "stream"
+  },
+  {
+    "id": "add-digipicks",
+    "title": "Add Digipicks",
+    "commandTemplate": "player.additem 0000000A {quantity}",
+    "category": "Inventory",
+    "description": "Adds Digipicks and records an estimated shadow ledger entry.",
+    "tags": ["inventory", "digipick", "lockpick"],
+    "safetyClass": "confirmation",
+    "defaultMode": "command",
+    "parameters": [{ "name": "quantity", "label": "Quantity", "type": "number", "required": true, "defaultValue": "10" }]
+  },
+  {
+    "id": "add-medpack",
+    "title": "Add Med Packs",
+    "commandTemplate": "player.additem 0000ABF9 {quantity}",
+    "category": "Inventory",
+    "description": "Adds Med Packs. Verify form IDs against your game version/localization before relying on item shortcuts.",
+    "tags": ["inventory", "aid", "medpack"],
+    "safetyClass": "confirmation",
+    "defaultMode": "command",
+    "parameters": [{ "name": "quantity", "label": "Quantity", "type": "number", "required": true, "defaultValue": "5" }]
+  },
+  {
+    "id": "add-credits",
+    "title": "Add credits",
+    "commandTemplate": "player.additem 0000000F {quantity}",
+    "category": "Inventory",
+    "description": "Adds credits and records an estimated shadow ledger entry.",
+    "tags": ["inventory", "credits"],
+    "safetyClass": "confirmation",
+    "defaultMode": "command",
+    "parameters": [{ "name": "quantity", "label": "Quantity", "type": "number", "required": true, "defaultValue": "1000" }]
+  },
+  {
+    "id": "add-any-item",
+    "title": "Add item by Form ID",
+    "commandTemplate": "player.additem {itemId} {quantity}",
+    "category": "Inventory",
+    "description": "Adds any known item Form ID and records it in the shadow ledger.",
+    "tags": ["inventory", "formid", "resource", "weapon", "aid"],
+    "safetyClass": "confirmation",
+    "defaultMode": "command",
+    "parameters": [
+      { "name": "itemId", "label": "Item Form ID", "type": "text", "required": true, "defaultValue": "0000000F" },
+      { "name": "quantity", "label": "Quantity", "type": "number", "required": true, "defaultValue": "1" }
+    ]
+  },
+  {
+    "id": "show-inventory",
+    "title": "Dump player inventory",
+    "commandTemplate": "player.showinventory",
+    "category": "Inventory",
+    "description": "Best-effort text dump. Parsing varies; use it for manual reconciliation with the app ledger.",
+    "tags": ["inventory", "dump", "tracking"],
+    "safetyClass": "safe",
+    "defaultMode": "command"
+  },
+  {
+    "id": "remove-item",
+    "title": "Remove item",
+    "commandTemplate": "player.removeitem {itemId} {quantity}",
+    "category": "Inventory",
+    "description": "Removes an item and records an estimated shadow ledger entry.",
+    "tags": ["inventory"],
+    "safetyClass": "confirmation",
+    "defaultMode": "command",
+    "parameters": [
+      { "name": "itemId", "label": "Item Form ID", "type": "text", "required": true },
+      { "name": "quantity", "label": "Quantity", "type": "number", "required": true, "defaultValue": "1" }
+    ]
+  },
+  {
+    "id": "quest-targets",
+    "title": "Show quest targets",
+    "commandTemplate": "sqt",
+    "category": "Quests",
+    "description": "Prints current quest target data as console text for searchable tracking.",
+    "tags": ["quest", "tracking", "objectives"],
+    "safetyClass": "safe",
+    "defaultMode": "command"
+  },
+  {
+    "id": "quest-vars",
+    "title": "Show quest variables",
+    "commandTemplate": "sqv {questId}",
+    "category": "Quests",
+    "description": "Prints quest variables for a known quest Form ID/editor ID. Output is raw text.",
+    "tags": ["quest", "variables", "debug"],
+    "safetyClass": "safe",
+    "defaultMode": "command",
+    "parameters": [{ "name": "questId", "label": "Quest ID", "type": "text", "required": true }]
+  },
+  {
+    "id": "position-x",
+    "title": "Read X position",
+    "commandTemplate": "player.getpos x",
+    "category": "Navigation",
+    "description": "Reads player X coordinate for manual location notes.",
+    "tags": ["position", "location", "tracking"],
+    "safetyClass": "safe",
+    "defaultMode": "command"
+  },
+  {
+    "id": "position-y",
+    "title": "Read Y position",
+    "commandTemplate": "player.getpos y",
+    "category": "Navigation",
+    "description": "Reads player Y coordinate for manual location notes.",
+    "tags": ["position", "location", "tracking"],
+    "safetyClass": "safe",
+    "defaultMode": "command"
+  },
+  {
+    "id": "position-z",
+    "title": "Read Z position",
+    "commandTemplate": "player.getpos z",
+    "category": "Navigation",
+    "description": "Reads player Z coordinate for manual location notes.",
+    "tags": ["position", "location", "tracking"],
+    "safetyClass": "safe",
+    "defaultMode": "command"
+  },
+  {
+    "id": "set-timescale",
+    "title": "Set timescale",
+    "commandTemplate": "set timescale to {scale}",
+    "category": "Time / Environment",
+    "description": "Changes world time speed. Values too high can destabilize schedules and scripts.",
+    "tags": ["time", "environment", "cheat"],
+    "safetyClass": "dangerous",
+    "defaultMode": "stream",
+    "parameters": [{ "name": "scale", "label": "Timescale", "type": "number", "required": true, "defaultValue": "20" }]
+  },
+  {
+    "id": "set-gamehour",
+    "title": "Set game hour",
+    "commandTemplate": "set gamehour to {hour}",
+    "category": "Time / Environment",
+    "description": "Sets in-game hour from 0 to 23.",
+    "tags": ["time", "environment"],
+    "safetyClass": "confirmation",
+    "defaultMode": "stream",
+    "parameters": [{ "name": "hour", "label": "Hour", "type": "number", "required": true, "defaultValue": "12" }]
+  },
+  {
+    "id": "teleport-cell",
+    "title": "Teleport to cell",
+    "commandTemplate": "coc {cellId}",
+    "category": "Travel",
+    "description": "Teleports to a cell. Use cautiously and save first.",
+    "tags": ["travel", "teleport"],
+    "safetyClass": "dangerous",
+    "defaultMode": "stream",
+    "parameters": [{ "name": "cellId", "label": "Cell ID", "type": "text", "required": true }]
+  }
+]

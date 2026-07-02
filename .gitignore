@@ -284,6 +284,11 @@ FakesAssemblies/
 # Node.js Tools for Visual Studio
 .ntvs_analysis.dat
 node_modules/
+web/companion/dist/
+web/companion/.vite/
+web/companion/*.tsbuildinfo
+web/companion/vite.config.d.ts
+web/companion/vite.config.js
 
 # Visual Studio 6 build log
 *.plg

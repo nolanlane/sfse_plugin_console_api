@@ -1,0 +1,10 @@
+{
+  "name": "Starfield Companion Console",
+  "short_name": "SF Companion",
+  "description": "Mobile-friendly companion app for the Starfield SFSE console API plugin.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07111f",
+  "theme_color": "#07111f",
+  "icons": []
+}
